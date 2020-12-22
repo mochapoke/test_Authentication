@@ -39,11 +39,11 @@ app.get('/register', (req,res) => {
 
 app.post('/register', (req, res) => {
   const newUser = new User({
-    email: req.body.userName;
+    email: req.body.userName
   });
 
   newUser.save(err => {
-    err ? console.log(err) : res.render('secrets');
+    err ? console.log(err) : res.render('secrets')
   })
 })
 
