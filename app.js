@@ -39,7 +39,8 @@ app.get('/register', (req,res) => {
 
 app.post('/register', (req, res) => {
   const newUser = new User({
-    email: req.body.userName
+    email: req.body.username,
+    password: req.body.password
   });
 
   newUser.save(err => {
@@ -48,7 +49,22 @@ app.post('/register', (req, res) => {
 })
 
 
+app.post('/login', (req, res) => {
+  const username= req.body.username;
+  const password = req.body.password;
 
+  User.findOne({email: username}, (err, foundUser) => {
+    if (err){
+      console.log(err);
+    } else {
+      if (foundUser){
+        if (foundUser.password === password){
+          res.render('secrets')
+        }
+      }
+    }
+  })
+})
 
 app.listen(3000, ()=>{
   console.log('server stated on port 3000');
